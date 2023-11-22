@@ -37,8 +37,8 @@ function handleBasicLightBox(originalImgSize) {
 
   instance.show();
 
-  function onEscClose(e) {
-    if (e.code === "Escape") {
+  function onEscClose({ code }) {
+    if (code === "Escape") {
       instance.close();
     }
   }
