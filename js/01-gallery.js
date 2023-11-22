@@ -1,7 +1,9 @@
 import { galleryItems } from "./gallery-items.js";
-// Change code below this line
 
 const gallery = document.querySelector(".gallery");
+
+gallery.insertAdjacentHTML("afterbegin", imagesMarkup(galleryItems));
+gallery.addEventListener("click", onImageClick);
 
 function imagesMarkup(images) {
   return images
@@ -20,11 +22,21 @@ function imagesMarkup(images) {
     .join("");
 }
 
-gallery.insertAdjacentHTML("afterbegin", imagesMarkup(galleryItems));
-
-gallery.addEventListener("click", onImageClick);
-
 function onImageClick(e) {
   e.preventDefault();
-  console.log(e);
+  if (e.target.nodeName !== "IMG") return;
+
+  const originalImgSize = e.target.dataset.source;
+
+  const instance = basicLightbox.create(
+    `
+    <img src=${originalImgSize}>
+`,
+    {
+      onShow: () => {},
+      onClose: () => {},
+    }
+  );
+
+  instance.show();
 }
