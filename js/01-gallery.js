@@ -26,9 +26,10 @@ function imagesMarkup(images) {
 function onImageClick(e) {
   e.preventDefault();
   if (e.target.nodeName !== "IMG") return;
+  handleBasicLightBox(e.target.dataset.source);
+}
 
-  const originalImgSize = e.target.dataset.source;
-
+function handleBasicLightBox(originalImgSize) {
   const instance = basicLightbox.create(`<img src=${originalImgSize}>`, {
     onShow: () => window.addEventListener("keydown", onEscClose),
     onClose: () => window.removeEventListener("keydown", onEscClose),
