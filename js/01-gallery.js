@@ -1,8 +1,9 @@
 import { galleryItems } from "./gallery-items.js";
 
 const gallery = document.querySelector(".gallery");
+const galleryMarkup = imagesMarkup(galleryItems);
 
-gallery.insertAdjacentHTML("afterbegin", imagesMarkup(galleryItems));
+gallery.insertAdjacentHTML("afterbegin", galleryMarkup);
 gallery.addEventListener("click", onImageClick);
 
 function imagesMarkup(images) {
@@ -28,15 +29,16 @@ function onImageClick(e) {
 
   const originalImgSize = e.target.dataset.source;
 
-  const instance = basicLightbox.create(
-    `
-    <img src=${originalImgSize}>
-`,
-    {
-      onShow: () => {},
-      onClose: () => {},
-    }
-  );
+  const instance = basicLightbox.create(`<img src=${originalImgSize}>`, {
+    onShow: () => window.addEventListener("keydown", onEscClose),
+    onClose: () => window.removeEventListener("keydown", onEscClose),
+  });
 
   instance.show();
+
+  function onEscClose(e) {
+    if (e.code === "Escape") {
+      instance.close();
+    }
+  }
 }
