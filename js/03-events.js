@@ -26,4 +26,6 @@ function onButtonsClick({ target }) {
   }
 
   target.classList.toggle("is-active");
+
+  console.log(selectedBtns);
 }
