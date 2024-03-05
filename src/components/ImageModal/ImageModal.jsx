@@ -1,9 +1,8 @@
-import ReactModal from "react-modal";
-
-export default function ImageModal() {
+import css from "./ImageModal.module.css";
+export default function ImageModal({ image: { description, urls } }) {
   return (
-    <ReactModal>
-      <p>Modal Content</p>
-    </ReactModal>
+    <>
+      <img className={css.image} src={urls.regular} alt={description} />
+    </>
   );
 }
