@@ -11,7 +11,7 @@ export default function SearchBar({ onSubmit }) {
       toast.error("Please, enter query for searching!");
       return;
     }
-    toast.success(`Lokking for ${query}...`);
+    toast.success(`Searching ${query}...`);
     onSubmit(query);
 
     e.currentTarget.reset();

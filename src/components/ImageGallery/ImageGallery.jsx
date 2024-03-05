@@ -9,9 +9,11 @@ export default function ImageGallery({ images }) {
   return (
     <ul className={css.image_gallery}>
       {images.map((image) => (
-        <li key={image.id}>
-          <ImageCard />
-        </li>
+        <ImageCard
+          key={image.id}
+          urls={image.urls}
+          alt={image.alt_description}
+        />
       ))}
     </ul>
   );

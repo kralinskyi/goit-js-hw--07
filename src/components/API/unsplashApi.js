@@ -1,8 +1,18 @@
 import axios from "axios";
 
-const KEY = "cWMQh_UzxalN9zl3YrjZ4TheDGt0uKhWGONnZUIIKEM";
-const https = `https://api.unsplash.com/photos/?client_id=${KEY}`;
+axios.defaults.baseURL = "https://api.unsplash.com";
 
-export default async function getPhotos() {
-  axios.get(https, { query: "dog" });
+const KEY = "cWMQh_UzxalN9zl3YrjZ4TheDGt0uKhWGONnZUIIKEM";
+const https = `/search/photos/?client_id=${KEY}`;
+
+export default async function fetchPhotos(query, page) {
+  const response = await axios.get(https, {
+    params: {
+      query,
+      per_page: 12,
+      page,
+    },
+  });
+
+  return response.data.results;
 }
